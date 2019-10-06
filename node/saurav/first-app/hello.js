@@ -1,8 +1,11 @@
 
+// const logger = require('./logger');
+const os = require('os');
 
 
-function sayHello(name){
-	console.log('Hello'+name);
-}
 
-sayHello('saurav');
+// console.log(logger.log('message'));
+// logger.log('message');
+
+var Freemem = os.freemem();
+console.log(`Free memory : ${Freemem}`);
