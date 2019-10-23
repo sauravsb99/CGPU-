@@ -21,35 +21,28 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 app.get('/', function(request, response) {
-	response.sendFile(path.join(__dirname + '/login.html'));
+	response.sendFile(path.join(__dirname + '/register.html'));
 });
 
 app.post('/auth', function(request, response) {
 	var username = request.body.username;
 	var password = request.body.password;
+
 	if (username && password) {
-		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields)
-		 {
-			if (results.length>0) {
+		connection.query('INSERT INTO accounts(username,password) VALUES (request.session.username,request.session.password)',[username, password], function (error, results,fields) 
+			{
+				console.log("1 record inserted");
+				//response.send('Incorrect Username and/or Password!');
 				request.session.loggedin = true;
 				request.session.username = username;
 				response.redirect('/home');
-			} else {
-					response.send('Incorrect Username and/or Password!');
-					response.end();
-			}
-
-
-	})
+			});
 	}
-	 else {
+	else {
 		response.send('Please enter Username and Password!');
 		response.end();
-	}
-
+		};
 });
-
-
 
 app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
@@ -60,4 +53,8 @@ app.get('/home', function(request, response) {
 	response.end();
 });
 
+
 app.listen(3000);
+
+
+
