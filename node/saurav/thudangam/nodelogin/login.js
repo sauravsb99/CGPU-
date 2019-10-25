@@ -27,15 +27,29 @@ app.get('/', function(request, response) {
 app.post('/auth', function(request, response) {
 	var username = request.body.username;
 	var password = request.body.password;
+	var email = request.body.email;
 	if (username && password) {
 		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-			// if (results.length > 0) {
+			if (results.length > 0) {
 				request.session.loggedin = true;
 				request.session.username = username;
 				response.redirect('/home');
-			// } else {
+			} 
+			// else {
 			// 	response.send('Incorrect Username and/or Password!');
-			// }			
+			// }	
+			else{
+
+		// 		connection.connect(function(err) {
+  // if (err) throw err;
+  // console.log("Connected!");
+  var sql = "INSERT INTO accounts (username,password,email) VALUES (?, ?,?)";
+  connection.query(sql,[username,password,email],function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
+// });
+			}		
 			response.end();
 		});
 	} else {
