@@ -4,13 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-
+var mysql = require('mysql');
 
 
 var userLogin = require('./routes/login')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var userRegister = require('./routes/register')
 var app = express();
 
 // view engine setup
@@ -30,6 +30,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login',userLogin);
+app.use('/register',userRegister);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,5 +47,31 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
+var connection = mysql.createConnection({
+	host     : 'localhost',
+	user     : 'sauravsb99',
+	password : '',
+	database : 'nodelogin'
+});
+
+
+
+
+connection.connect(function(err){
+  if(!err) {
+      console.log("Database is connected ... nn");
+  } else {
+      console.log("Error connecting database ... nn");
+  }
+  });
+
+
+
+
+
+
 
 module.exports = app;

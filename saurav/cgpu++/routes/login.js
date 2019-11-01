@@ -1,27 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-
-
-var connection = mysql.createConnection({
-	host     : 'localhost',
-	user     : 'sauravsb99',
-	password : '',
-	database : 'nodelogin'
-});
-
-
-
-
-connection.connect(function(err){
-  if(!err) {
-      console.log("Database is connected ... nn");
-  } else {
-      console.log("Error connecting database ... nn");
-  }
-  });
-
-
 
 
 router.get('/', function(req, res, next) {
@@ -30,10 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
     var username = req.body.username;
-    // res.send(username);
 	var password = req.body.password;
-    // var email = req.body.email;
-    // res.send(password);
 	if (username && password) {
 		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
 			if (results.length > 0) {
