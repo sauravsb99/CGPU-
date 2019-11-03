@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS `recruiterreg` (
+  `id` int(11) NOT NULL,
+  `business` varchar(50) NOT NULL,
+  `homepage` varchar(255) NOT NULL,
+  `contactperson` varchar(100) NOT NULL,
+  `designation` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` int(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `fax` int(100) NOT NULL,
+  `tenth` int(100) NOT NULL,
+  `twelth` int(100) NOT NULL,
+  `bcutoff` int(100) NOT NULL,
+  `mcb` int(100) NOT NULL,
+  `salary` int(100) NOT NULL,
+  `mnc` int(100) NOT NULL,
+  `bond` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `recruiterreg` ADD PRIMARY KEY (`id`);
+ALTER TABLE `recruiterreg` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+
