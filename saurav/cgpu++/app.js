@@ -13,6 +13,7 @@ var usersRouter = require('./routes/users');
 var userRegister = require('./routes/register')
 var recruiterRegister = require('./routes/recruiter')
 var IdGenerator = require('./routes/generate')
+var Report = require('./routes/report')
 var app = express();
 
 // view engine setup
@@ -36,6 +37,7 @@ app.use('/register',userRegister);
 app.use('/recruiterregister',recruiterRegister);
 app.use('/me',recruiterRegister);
 app.use('/generates',IdGenerator);
+app.use('/report',Report);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
