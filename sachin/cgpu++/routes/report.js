@@ -1,227 +1,201 @@
-const express = require('express')
-const router  = express.Router()
-//const grMethods = require('../../../methods/grievance')
-//const userMethods = require('../../../methods/user')
-//const uid = require('uniqid')
-var mysql = require('mysql');
-//const multer  = require('multer')
-var path = require('path');
-const fs = require('fs')
-const PDFDocument = require('pdfkit');
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');   
+var test='';
+var count=0;
 
-router.get('/pending/all',(req,res) => {
-    var info = {
-        status: "pending"
-    }
-    grMethods.getAll(info)
-    .then((doc) => {
-        var data = []
-        var id = 1
-        doc.forEach(element => {
-            data.push({
-                'id': id++,
-                'gr_id': element.grievance_id,
-                'title':element.title,
-                'remark':element.remark,
-                'status':element.status
-            })
-        });
-        res.json({
-            'success':true,
-            'data_length':data.length,
-            'info':data
-        })
-    })
-    .catch((err)=>{
-        res.json({
-            'success':false,
-            'error':err
-        })
-    })
-})
+var PDFDocument, doc;
+// var fs = require('fs');
+PDFDocument = require('pdfkit');
+doc = new PDFDocument();
+// doc.pipe(fs.createWriteStream('output.pdf'));
+// PDF Creation logic goes here
+// doc.end();
+var filename='test.pdf';    
 
-router.post('/accept',(req,res,next) => {
-    var info = {}
-    info.username = req.body.username
-    info.password = req.body.password
 
-    grMethods.acceptGrievance(info)
-    .then((doc) => {
-        res.json({
-            success: true
-        })
-    })
-    .catch((err) => {
-        res.json({
-            success: false,
-            error: err.message
-        })
-    })
-})
+var datetime = new Date();
 
-router.get('/accepted',(req,res) => {
-    var info = {
-        username : req.query.username,
-        status: 'accepted'
-    }
-    console.log(info);  
-    grMethods.getAllCell(info)
-    .then((doc) => {
-        var data = []
-        var id = 1
-        doc.forEach(element => {
-            data.push({
-                'id': id++,
-                'gr_id': element.grievance_id,
-                'title':element.title,
-                'remark':element.remark,
-                'status':element.status
-            })
-        });
-        res.json({
-            'success':true,
-            'data_length':data.length,
-            'info':data
-        })
-    })
-    .catch((err)=>{
-        res.json({
-            'success':false,
-            'error':err.message
-        })
-    })
-})
 
-router.get('/single',(req,res) => {
-    var info = {
-        grievance_id: req.query.grievance_id
-    }
-    grMethods.getGrievanceById(info)
-    .then((grievance) =>  {
-        var data = {}
-        data.title = grievance.title
-        data.description = grievance.description
-        userMethods.findUserByUserID(grievance)
-        .then((user) => {
-            data.username = user.user_name
-            res.json({
-                success:true,
-                data: data
-            })
-        })
-        .catch((err) => {
-            console.log(err);
-            res.json({
-                success:false,
-                error: err.message
-            })
-        })
-    })
-    .catch((err) => {
-        res.json({
-            success:false,
-            error: err.message
-        })
-    })
-})
+var connection = mysql.createConnection({
+	host     : 'localhost',
+	user     : 'newuser',
+	password : 'password',
+	database : 'nodelogin'
+});
 
-router.post('/resolve',(req,res) => {
-    var info = {}
-    info.grievance_id = req.body.grievance_id
-    info.remark = req.body.remark
-    info.status = 'resolved'
-    info.resolve_date = new Date(Date.now())
-    grMethods.resolveGrievance(info)
-    .then((doc) => {
-        res.json({
-            success: true,
-            message: 'Succesfully resolved'
-        })
-    })
-    .catch((err) => {
-        res.json({
-            success: false,
-            error: err.message
-        })
-    })
-})
 
-router.post('/print/report',(req,res)=>{
-    dateToCheck=new Date(req.body.selectedDate)
-    grMethods.getAllByDate()
-    .then((doc) => {
-        var data = []
-        var id = 1
-        var resolvedCount = 0
-        doc.forEach(element => {
-            date_created = new Date(element.date_created)
-            if(date_created.getFullYear() === dateToCheck.getFullYear()){
-                if(date_created.getMonth() === dateToCheck.getMonth()){
-                    data.push({
-                        'id': id++,
-                        'gr_id': element.grievance_id,
-                        'title':element.title,
-                        'remark':element.remark,
-                        'status':element.status,
-                        'userid':element.user_id
-                    })
-                    if(element.status=="resolved"){
-                        resolvedCount += 1;
-                    }
+router.get('/', function(req, res, next) {
+  res.send('Report');
+});
+
+    
+router.post('/',(req,res)=>
+{
+    var option = req.body.option;
+
+    var title        = "College Of Engineering Trivandrum";
+
+doc.pipe(res);
+
+res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
+    res.setHeader('Content-type', 'application/pdf');
+
+      doc.font('Times-Roman', 18)
+        .fontSize(25)
+        .text(title, 100, 50);
+
+                                doc.moveTo(10,100)                               // set the current point
+                                .lineTo(doc.page.width-10,100)                            // draw a line
+                                  .stroke(); 
+                                doc.moveDown(2);
+
+    connection.connect(function(err) {
+                if (err) throw err;
+                console.log("Connected!");
+                var sql = "SELECT * FROM  accounts ";
+                connection.query(sql,function (err, result) {
+                  if (err) throw err;
+                //   console.log(result);
+                  var string=JSON.stringify(result);
+            				// console.log('>> string: ', string );
+                  var json =  JSON.parse(string);
+                  
+                //   var username=json.username;
+                // console.log(json[70]);
+                // console.log(json);
+                var i;
+                for (i=0;i<json.length;i++){
+                    test=json[i].username;
+                    count=count+1;
+                    // doc.text(json[i].username, {
+                    //     width: 410,
+                    //     align: 'left'
+                    // });
+
+                    //console.log(test);
+
+
+                             //   doc.fontSize(13).text("Grievance Cell Report for the month"+"  "+monthInWords+" - "+dateToCheck.getFullYear(),{align:'left'})
+                              //  doc.moveDown();
+                                doc.fontSize(13).text("Number of grievances recieved : "+test.length);
+                                doc.moveDown();
+                              //  doc.text("Number of grievances resolved : ");
+
+                                doc.text(`Number of grievances resolved : ${test}`);
+
+                               // for( i=0 ;i<json.length;i++){
+                                //console.log(content[i]);
+                                //doc.fontSize(10).text(content[i])};
+
+                                doc.moveDown();
+                                doc.fontSize(10).text("Sl.No                 UserId                        Title              Status",{align:'left'});
+                                
+                                doc.moveDown(0)
+                                doc.moveTo(doc.x,doc.y)                               // set the current point
+                                .lineTo(doc.page.width-70,doc.y)                            // draw a line
+                                .stroke();
+                                  doc.moveDown(0)
+
+                              //  }
+                                doc.moveTo(10,doc.page.height-18)                               // set the current point
+                                .lineTo(doc.page.width-10,doc.page.height-18)                            // draw a line
+                                  .stroke();
+                                doc.fontSize(7).text("Grievance Cell,College Of Engineering Trivandrum",90,doc.page.height-15,{lineBreak:false})
+
+
+
+
+
                 }
-            }
-        });
-        console.log(data)
-        var month = new Array();
-        month[0] = "January";
-        month[1] = "February";
-        month[2] = "March";
-        month[3] = "April";
-        month[4] = "May";
-        month[5] = "June";
-        month[6] = "July";
-        month[7] = "August";
-        month[8] = "September";
-        month[9] = "October";
-        month[10] = "November";
-        month[11] = "December";
-        var monthInWords = month[dateToCheck.getMonth()];
-        const document = new PDFDocument;
-        document.pipe(res);
-        document.fontSize(25).text("College Of Engineering Trivandrum",{align:'center'})
-        document.moveTo(10,100)                               // set the current point
-        .lineTo(document.page.width-10,100)                            // draw a line
-        .stroke(); 
-        document.moveDown(2);
-        document.fontSize(13).text("Grievance Cell Report for the month"+"  "+monthInWords+" - "+dateToCheck.getFullYear(),{align:'left'})
-        document.moveDown();
-        document.fontSize(13).text("Number of grievances recieved : "+data.length)
-        document.moveDown();
-        document.text("Number of grievances resolved : "+resolvedCount)
-        document.moveDown();
-        document.fontSize(10).text("Sl.No                 UserId                        Title              Status",{align:'left'});
-        
-        document.moveDown(0)
-        document.moveTo(document.x,document.y)                               // set the current point
-        .lineTo(document.page.width-70,document.y)                            // draw a line
-        .stroke();
-        document.moveDown(0)
-        for( i=0 ;i<data.length;i++){
-            console.log( data[i].remark);
-            document.fontSize(10).text(data[i].id+"      "+data[i].userid+"      "+data[i].title+"         "+data[i].status,{align:'left'});
-        }
-        document.moveTo(10,document.page.height-18)                               // set the current point
-        .lineTo(document.page.width-10,document.page.height-18)                            // draw a line
-        .stroke();
-        document.fontSize(7).text("Grievance Cell,College Of Engineering Trivandrum",90,document.page.height-15,{lineBreak:false})
-        document.end();
-    })
-    .catch((err)=>{
-        res.json({
-            'success':false,
-            'error':err
-        })
-    })
-})
+                    // console.log(test);
+                    // username="ss";
+doc.text(`no.of ${count}`);
+doc.end();
+                                
+                  
+    
+    
+                });
+                                    
+    
+                                        
+    
+            });
 
-module.exports = router
+            // console.log("content");
+
+             var content = test;
+    // var publish_date = datetime;
+    // var author_name  = "CGPU++";
+    // var link         = "www.cet.ac.in";
+    
+    //   doc.fontSize(15)
+    //      .fillColor('blue')
+    //      .text('Read Full Article', 100, 100)
+    //      .link(100, 100, 160, 27, link);
+    //   doc.moveDown()
+    //      .fillColor('red')
+    //      .text("Author: "+author_name);
+      
+    //   doc.moveDown()
+    //      .fillColor('black')
+    //      .fontSize(15)
+    //      .text(content, {
+    //        align: 'justify',
+    //        indent: 30,
+    //        height: 300,
+    //        ellipsis: true
+    //      });
+//test="hello";
+    console.log(test);
+//for( i=0 ;i<content.length;i++){
+//      console.log( content[i]);
+//      doc.text(content[3],250,5000);
+//    }
+
+        //doc.text(content,250,5000);
+      
+
+      
+//doc.on('pageAdded', () => doc.text("Page Title"));
+    
+    // if( option = 1){
+    
+    //     connection.connect(function(err) {
+    //         if (err) throw err;
+    //         console.log("Connected!");
+    //         var sql = "SELECT username FROM  accounts ";
+    //         connection.query(sql,function (err, result) {
+    //           if (err) throw err;
+    //         //   console.log(result);
+    //           var string=JSON.stringify(result);
+    //     				// console.log('>> string: ', string );
+    //           var json =  JSON.parse(string);
+              
+    //         //   var username=json.username;
+    //         // console.log(json[70]);
+    //         var i;
+    //         for (i=0;i<json.length;i++){
+
+    //             doc.text(json[i].username, {
+    //                 width: 410,
+    //                 align: 'left'
+    //             });
+    //             // console.log(json[i].username);
+    //         }
+
+    //             // username="ss";
+
+              
+
+
+    //         });
+
+
+
+    //     });
+    // }
+        
+});
+module.exports = router;

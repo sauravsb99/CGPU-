@@ -16,17 +16,5 @@ app.get('/', (req, res) => {
 const reportingApp = express();
 app.use('/reporting', reportingApp);
 
-const jsreport = require('jsreport')({
-  extensions: {
-      express: { app: reportingApp, server: server },
-  },
-  appPath: "/reporting"
-});
-
-jsreport.init().then(() => {
-  console.log('jsreport server started')
-}).catch((e) => {
-  console.error(e);
-});
 
 module.exports = router;
