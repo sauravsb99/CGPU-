@@ -21,3 +21,4 @@ CREATE TABLE IF NOT EXISTS `recruiterreg` (
 ALTER TABLE `recruiterreg` ADD PRIMARY KEY (`id`);
 ALTER TABLE `recruiterreg` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 
+alter table accounts add constraint unquser UNIQUE(username);

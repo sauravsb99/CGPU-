@@ -1,0 +1,173 @@
+{
+  "name": "a",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
+  }
+}
+
+{
+  "template": {
+    "content": "...",
+    "helpers": "...",
+    "engine": "...",
+    "recipe": "...",
+    "phantomImage": {
+      "printDelay": 1000,
+      "quality": 100,
+      "imageType": "png",
+      "blockJavaScript": false,
+      "waitForJS": false
+    },
+    "electron": {
+      "landscape": true,
+      "format": "...",
+      "printBackground": true,
+      "width": 100,
+      "height": 100,
+      "printDelay": 1000,
+      "blockJavaScript": false,
+      "waitForJS": true
+    },
+    "chrome": {
+      "scale": 1,
+      "displayHeaderFooter": false,
+      "printBackground": false,
+      "landscape": false,
+      "pageRanges": "...",
+      "format": "...",
+      "width": "...",
+      "height": "...",
+      "marginTop": "...",
+      "marginRight": "...",
+      "marginBottom": "...",
+      "marginLeft": "...",
+      "mediaType": "print|screen"
+    },
+    "chromeImage": {
+      "type": "jpeg|png",
+      "quality": 80,
+      "fullPage": false,
+      "clipX": 0,
+      "clipY": 0,
+      "clipWidth": 800,
+      "clipHeight": 800,
+      "omitBackground": false,
+      "mediaType": "print|screen"
+    },
+    "htmlToText": {
+      "wordWrap": 130
+    },
+    "omitDataFromOutput": false,
+    "pdfMeta": {
+      "title": "...",
+      "author": "...",
+      "subject": "...",
+      "keywords": "...",
+      "creator": "...",
+      "producer": "..."
+    },
+    "docx": {
+      "templateAsset": {
+        "encoding": "...",
+        "content": "..."
+      },
+      "templateAssetShortid": "..."
+    },
+    "phantom": {
+      "margin": "...",
+      "header": "...",
+      "footer": "...",
+      "footerHeight": "...",
+      "orientation": "...",
+      "format": "...",
+      "width": "...",
+      "height": "...",
+      "printDelay": 1000,
+      "resourceTimeout": 1000,
+      "customPhantomJS": true,
+      "blockJavaScript": false,
+      "waitForJS": false,
+      "fitToPage": false
+    },
+    "pptx": {
+      "templateAsset": {
+        "encoding": "...",
+        "content": "..."
+      },
+      "templateAssetShortid": "..."
+    },
+    "wkhtmltopdf": {
+      "orientation": "...",
+      "header": "...",
+      "footer": "...",
+      "headerHeight": "...",
+      "footerHeight": "...",
+      "dpi": "...",
+      "marginBottom": "...",
+      "marginLeft": "...",
+      "marginRight": "...",
+      "marginTop": "...",
+      "pageSize": "...",
+      "pageHeight": "...",
+      "pageWidth": "...",
+      "toc": "...",
+      "tocHeaderText": "...",
+      "tocLevelIndentation": "...",
+      "tocTextSizeShrink": "...",
+      "javascriptDelay": "...",
+      "windowStatus": "...",
+      "disableSmartShrinking": "...",
+      "printMediaType": "..."
+    },
+    "contentType": "...",
+    "fileExtension": "...",
+    "contentDisposition": "...",
+    "staticPdf": {
+      "rawContent": "<...base64 PDF...>",
+      "pdfAssetShortid": "..."
+    },
+    "docxtemplater": {
+      "templateAsset": {
+        "encoding": "...",
+        "content": "..."
+      },
+      "templateAssetShortid": "..."
+    },
+    "scripts": [
+      {
+        "shortid": "...",
+        "content": "function beforeRender..."
+      }
+    ],
+    "pdfSign": {
+      "certificateAsset": {
+        "encoding": "...",
+        "content": "..."
+      },
+      "certificateAssetShortid": "..."
+    },
+    "htmlToXlsx": {
+      "htmlEngine": "..."
+    }
+  },
+  "data": {
+    "aProperty": "..."
+  },
+  "options": {
+    "debug": {
+      "logsToResponse": true,
+      "logsToResponseHeader": true
+    },
+    "language": "en"
+  }
+}

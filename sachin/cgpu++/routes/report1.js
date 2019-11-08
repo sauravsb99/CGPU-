@@ -1,14 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app=express();
-var server='localhost:3000'
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'CGPU++' });
-});
-
-
-
+var out=require('./output.pdf');
 app.get('/', (req, res) => {
   res.send('Hello from the main application');
 });
@@ -16,10 +9,12 @@ app.get('/', (req, res) => {
 const reportingApp = express();
 app.use('/reporting', reportingApp);
 
+//const server = app.listen(3000);
+
 const jsreport = require('jsreport')({
   extensions: {
-      express: { app: reportingApp, server: server },
-  },
+      express: { app: reportingApp},
+  }, //, server: server 
   appPath: "/reporting"
 });
 
@@ -28,5 +23,5 @@ jsreport.init().then(() => {
 }).catch((e) => {
   console.error(e);
 });
-
+ out.stream.pipe(res);
 module.exports = router;
