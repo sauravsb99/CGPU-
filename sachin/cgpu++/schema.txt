@@ -22,3 +22,5 @@ ALTER TABLE `recruiterreg` ADD PRIMARY KEY (`id`);
 ALTER TABLE `recruiterreg` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 
 alter table accounts add constraint unquser UNIQUE(username);
+alter table accounts add constraint valmail check(email like '%@%.%');
+alter table accounts add constraint unimail UNIQUE(email);
