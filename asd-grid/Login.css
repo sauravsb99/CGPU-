@@ -1,0 +1,180 @@
+.container-fluid{
+    text-align: center;
+}
+
+.logo-main{
+    margin: auto;
+
+}
+.row-head-main{
+    background-color: rgb(13, 119, 27);
+}
+.head-main{
+    margin: auto;
+    font-size: 1.2vw;
+    font-family: 'Merriweather', serif;
+    font-weight: 2px;
+    color: ghostwhite;
+}
+
+.contact-main{
+    text-align: start;
+    margin-top: 2em;
+    color: beige;
+}
+
+
+.sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.sticky a{
+    color: beige;
+}
+.navbar{
+    background-color: #052b08;
+}
+
+nav li{
+    margin-left: 1em;
+    margin-right: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+.footer{
+    background-color: #052b08;
+    margin-top: 2em;
+    padding: 1.5em;
+    color: blanchedalmond;
+}
+
+.footer a{
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+
+.card-signin {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 1em 1em 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-signin .card-title {
+    margin-bottom: 2rem;
+    font-weight: bolder;
+    font-size: 1.5rem;
+  }
+  .card h2 b{
+      margin: 2em;
+  }
+  
+  .card-signin .card-body {
+    padding: 2rem;
+  }
+
+  
+  .form-signin {
+    width: 100%;
+  }
+  
+  .form-signin .btn {
+    font-size: 80%;
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  .form-label-group input {
+    height: auto;
+    border-radius: 2rem;
+  }
+  
+  .form-label-group>input,
+  .form-label-group>label {
+    padding: var(--input-padding-y) var(--input-padding-x);
+  }
+  
+  .form-label-group>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+  }
+  
+  .form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+  }
+  
+  .form-label-group input:-ms-input-placeholder {
+    color: transparent;
+  }
+  
+  .form-label-group input::-ms-input-placeholder {
+    color: transparent;
+  }
+  
+  .form-label-group input::-moz-placeholder {
+    color: transparent;
+  }
+  
+  .form-label-group input::placeholder {
+    color: transparent;
+  }
+  
+  .form-label-group input:not(:placeholder-shown) {
+    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+    padding-bottom: calc(var(--input-padding-y) / 3);
+  }
+  
+  .form-label-group input:not(:placeholder-shown)~label {
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    font-size: 12px;
+    color: #777;
+  }
+  
+  
+  /* Fallback for Edge
+  -------------------------------------------------- */
+  
+  @supports (-ms-ime-align: auto) {
+    .form-label-group>label {
+      display: none;
+    }
+    .form-label-group input::-ms-input-placeholder {
+      color: #777;
+    }
+  }
+  
+  /* Fallback for IE
+  -------------------------------------------------- */
+  
+  @media all and (-ms-high-contrast: none),
+  (-ms-high-contrast: active) {
+    .form-label-group>label {
+      display: none;
+    }
+    .form-label-group input:-ms-input-placeholder {
+      color: #777;
+    }
+  }
