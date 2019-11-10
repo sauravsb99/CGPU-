@@ -1,0 +1,64 @@
+.container-fluid{
+    text-align: center;
+}
+
+.logo-main{
+    margin: auto;
+
+}
+.row-head-main{
+    background-color: rgb(13, 119, 27);
+}
+.head-main{
+    margin: auto;
+    font-size: 1.2vw;
+    font-family: 'Merriweather', serif;
+    font-weight: 2px;
+    color: ghostwhite;
+}
+
+.contact-main{
+    text-align: start;
+    margin-top: 2em;
+    color: beige;
+}
+
+
+.sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.sticky a{
+    color: beige;
+}
+.navbar{
+    background-color: #052b08;
+}
+
+nav li{
+    margin-left: 1em;
+    margin-right: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+.carousel{
+    background-color:#47735B;
+}
+
+
+
+.footer{
+    background-color: #052b08;
+    margin-top: 2em;
+    padding: 1.5em;
+    color: blanchedalmond;
+}
+
+.footer a{
+    text-decoration: none;
+    color: blanchedalmond;
+}
