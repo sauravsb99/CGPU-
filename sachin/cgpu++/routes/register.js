@@ -14,8 +14,8 @@ var config = require('../config');
 // const secret="saurav";
 var connection = mysql.createConnection({
 	host     : 'localhost',
-	user     : 'sauravsb99',
-	password : '',
+  user     : 'newuser',
+  password : 'password',
 	database : 'nodelogin'
 });
 // router.get('/',(req,res)=>{

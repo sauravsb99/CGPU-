@@ -10,8 +10,8 @@ var config = require('../config');
 
 var connection = mysql.createConnection({
 	host     : 'localhost',
-	user     : 'sauravsb99',
-	password : '',
+	user     : 'newuser',
+	password : 'password',
 	database : 'nodelogin'
 });
 
