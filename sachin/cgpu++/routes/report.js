@@ -52,27 +52,27 @@ var connection = mysql.createConnection({
             .addColumns([
                 {
                     id: 'description',
-                    header: 'Product',
+                    header: 'UserId',
                     align: 'left'
                 },
                 {
                     id: 'quantity',
-                    header: 'Quantity',
+                    header: 'Email',
                     width: 50
-                },
+                }/*,
                 {
                     id: 'price',
-                    header: 'Price',
+                    header: 'password',
                     width: 40
-                },
-                {
+                },/*
+                /*{
                     id: 'total',
                     header: 'Total',
                     width: 70,
                     renderer: function (tb, data) {
                         return 'CHF ' + data.total;
                     }
-                }
+                }*/
             ])
 
             // add events (here, we draw headers on each new page)
@@ -142,8 +142,9 @@ res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
 
 //table
 
-
-                    table.addBody([{description: `${json[i].username}`, quantity: 1, price: 20.10, total: 20.10}
+                    doc.fontSize(13).text(`The details of the required student with id = ${json[i].id}`);
+                    doc.moveDown();
+                    table.addBody([{description: `${json[i].username}`, quantity: `${json[i].username}`/*, price: 20.10, total: 20.10*/}
                     ]);               
                     table.onPageAdd(function (table, row, ev) {
     // do something like
