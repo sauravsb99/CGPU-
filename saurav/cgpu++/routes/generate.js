@@ -25,8 +25,8 @@ router.get('/', function(req, res, next) {
 router.post('/',(req,res)=>{
     var username = req.body.username;
     var limit = req.body.limit;
-    var email="test@test.com";
-    var password="test";
+    var email="test";
+    var password="test@test";
     var hashedPassword = bcrypt.hashSync(password);
 
 
@@ -43,7 +43,7 @@ router.post('/',(req,res)=>{
           var sql = "INSERT INTO accounts (username,password,email) VALUES (?, ?, ?)";
           connection.query(sql,[username+i,hashedPassword,email],function (err, result) {
             if (err) throw err;
-            console.log("1 record inserted");
+            console.log(result);
             // console.log(result.insertId);
 
             userid=result.insertId;
@@ -53,7 +53,7 @@ router.post('/',(req,res)=>{
                 var token = jwt.sign({ id: userid }, config.secret, {
                 expiresIn: 86400 // expires in 24 hours
                 });
-            console.log(token);
+            // console.log(token);
         //   res.status(200).send({ auth: true, token: token });
 
           });

@@ -58,12 +58,12 @@ router.post('/',(req,res)=>{
           var sql = "INSERT INTO accounts (username,password,email) VALUES (?, ?, ?)";
           connection.query(sql,[username,hashedPassword,email],function (err, result) {
             if (err) throw err;
-            console.log("1 record inserted");
+            console.log(result);
             // console.log(result.insertId);
 
             userid=result.insertId;
                      // var userid;
-          console.log(userid);
+          // console.log(userid);
 
           var token = jwt.sign({ id: userid }, config.secret, {
             expiresIn: 86400 // expires in 24 hours

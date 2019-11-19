@@ -7,12 +7,34 @@
 var app = require('../app');
 var debug = require('debug')('cgpu:server');
 var http = require('http');
+const models = require('../models');
+
+// const Sequelize = require('sequelize');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8001');
+// Option 1: Passing parameters separately
+// const sequelize = new Sequelize('CGPU', 'sauravsb99', '', {
+//   host: 'localhost',
+//   dialect: 'mysql'/* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+// });
+// sequelize
+//   .authenticate()
+//   .then(() => {
+//     console.log('Connection has been established successfully.');
+//   })
+//   .catch(err => {
+//     console.error('Unable to connect to the database:', err);
+//   });
+
+
+
+models.sequelize.sync();
+
+
+var port = normalizePort(process.env.PORT || '8888');
 app.set('port', port);
 
 /**
