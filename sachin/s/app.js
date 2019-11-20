@@ -1,48 +1,46 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
-var session = require('express-session');
-var mysql = require('mysql');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+var routes = require('./routes/index');
+var users  = require('./routes/users');
+
 var app = express();
-var routes = require('./routes')
-var index = require('.routes/index');
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.json());
-app.use(app.router);
-routes.initialize(app);
-app.use(bodyParser.json());//parse application/x-www-form-urlencoded
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-// parse the raw data
-app.use(bodyParser.raw());
-// parse text
-app.use(bodyParser.text());
 app.use('/', routes);
-app.use('/index', index);
-const Sequelize = require('sequelize');// initialize an instance of Sequelize
-const sequelize = new Sequelize({
-  database: 'users_db',
-  username: 'root',
-  password: '',
-  dialect: 'mysql',
-});// check the databse connection
-sequelize.authenticate()
-  .then(() => console.log('Connection has been established successfully.'))
-  .catch(err => console.error('Unable to connect to the database:', err));
+app.use('/users', users);
 
-
-router.get('/', function(req, res, next) {
-  res.render('hey this worked');
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-router.get('/another/route', function(req, res, next) {
-  res.json({ hello: 'world' });
+// error handler
+// no stacktraces leaked to user unless in development environment
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: (app.get('env') === 'development') ? err : {}
+  });
 });
 
-module.exports = router;
+
+module.exports = app;
