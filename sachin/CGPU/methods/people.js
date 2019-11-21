@@ -21,6 +21,23 @@ peopleMethods.getPeopleByEmail = (info) => {
     })
 }
 
+peopleMethods.getPeopleByUsername = (info) => {
+    return new Promise((resolve, reject) => {
+        model.findOne({
+            'where':{
+                'username': info.username
+            }
+        })
+        .then((people) => {
+            resolve(people)
+        })
+        .catch((err) => {
+            console.log("Error caught in db access "+err.message);            
+            reject(err)
+        })
+    })
+}
+
 peopleMethods.getPeopleByID = (info) => {
     return new Promise((resolve,reject) => {
         model.findOne({

@@ -6,6 +6,8 @@ const recruiterMethods = require('../../methods/recruiter')
 const uid = require('uniqid')
 const fs = require('fs')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const passport = require('passport')
 
 
 
@@ -58,7 +60,10 @@ router.post('/student',(req,res) => {
     var person = {}
     person.people_id = uid();
     person.name = req.body.name
+    person.username = req.body.username
+    const token = jwt.sign({'username': person.username, 'password' : req.body.password }, 'sachhhasdfghhkl')
     person.role = 'student'
+    person.password = token
     person.email = req.body.email
     person.phone = req.body.phone
     peopleMethods.addPerson(person)
@@ -136,129 +141,7 @@ router.post('/student',(req,res) => {
         }
     })
 
-    
-    //     .then((info) => {
-    //         res.json({
-    //             "Success":true
-    //         })
-    //     })
-    //     .catch((err) => {
-    //         res.json({
-    //             "Success":false,
-    //             "error":err.message
-    //         })
-    //     })    
-    // // })
-    // .catch((err) => {
-    //     res.json({
-    //         "Success":false,
-    //         "error":err.message
-    //     })
-    // })
 })
-
-
-
-// router.post('/recruiter',(req,res) => {
-
-//     var person = {}
-//     person.people_id = uid();
-//     person.name = req.body.name
-//     person.role = 'recruiter'
-//     person.email = req.body.email
-//     person.phone = req.body.phone
-//     peopleMethods.addPerson(person)
-//     .then((person) => {
-
-//         var reca = {
-//             rec_id: req.body.rec_id,
-//             rec_name: req.body.rec_name,
-//             rec_package: req.body.rec_package,
-//         }
-    
-//         reca.people_id = person.people_id
-//         recruiterMethods.addRecruiter(reca)
-    
-//         .then((reca) => {
-//             res.json({
-//                 "Success":true,
-//                 "username":"ivide"
-//             })
-            
-//         })
-    
-//         .catch((err) => {
-//             if(err.message == "Validation error"){
-//                 peopleMethods.removePerson(info)
-//                 .then((result) => {
-//                     res.json({
-//                         "Success":false,
-//                         "error":"username already in use"
-//                     })
-//                 })
-//                 .catch((err) => {
-//                     res.json({
-//                         "Success":false,
-//                         "error":err.message
-//                     })
-//                 })
-//             }
-//             else{
-//                 res.json({
-//                     "Success":false,
-//                     "error":err.message
-//                 })
-//             }
-//         })
-
-        
-//     })
-
-//     .catch((err) => {
-//         if(err.message == "Validation error"){
-//             peopleMethods.removePerson(person)
-//             .then((result) => {
-//                 res.json({
-//                     "Success":false,
-//                     "error":"username already in use"
-//                 })
-//             })
-//             .catch((err) => {
-//                 res.json({
-//                     "Success":false,
-//                     "error":err.message
-//                 })
-//             })
-//         }
-//         else{
-//             res.json({
-//                 "Success":false,
-//                 "error":err.message
-//             })
-//         }
-//     })
-
-    
-//     //     .then((info) => {
-//     //         res.json({
-//     //             "Success":true
-//     //         })
-//     //     })
-//     //     .catch((err) => {
-//     //         res.json({
-//     //             "Success":false,
-//     //             "error":err.message
-//     //         })
-//     //     })    
-//     // // })
-//     // .catch((err) => {
-//     //     res.json({
-//     //         "Success":false,
-//     //         "error":err.message
-//     //     })
-//     // })
-// })
-
 
 
 
@@ -275,20 +158,12 @@ router.post('/recruiter',(req,res) => {
 
 
         var info = {}
-            // admission_no: req.body.admission_no,
-            // department: req.body.department,
-            // date_of_join: req.body.date,
-            // sex: req.body.sex,
-            // place1: req.body.place1,
-            // place2: req.body.place2,
-            // place3: req.body.place3
+ 
             info.rec_id = req.body.rec_id
             info.people_id = person.people_id
             info.rec_name = req.body.rec_name
             info.rec_package = req.body.rec_package
-        
-        // console.log("289");
-        // info.people_id = person.people_id
+
         console.log(info);
         recruiterMethods.addRecruiter(info)
         

@@ -1,6 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
 	const Student = sequelize.define('student',{
 		people_id:{type: DataTypes.STRING, primaryKey: true ,allowNull:false},
+		username:{type:DataTypes.STRING,primaryKey: true,allowNull:false},
+		password:{type:DataTypes.STRING,allowNull:false},
 		admission_no:{type: DataTypes.STRING, unique: true ,allowNull:false},
 		department:{type:DataTypes.STRING,allowNull:false},
 		date_of_join:{type:DataTypes.DATEONLY,allowNull:false},
