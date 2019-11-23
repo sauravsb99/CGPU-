@@ -1,0 +1,135 @@
+a{
+    text-decoration: none;
+}
+
+.container-fluid{
+    text-align: center;
+}
+
+.logo-main{
+    margin: auto;
+
+}
+.row-head-main{
+    background-color: rgb(13, 119, 27);
+}
+.head-main{
+    margin: auto;
+    font-size: 1.2vw;
+    font-family: 'Merriweather', serif;
+    font-weight: 2px;
+    color: ghostwhite;
+}
+
+.contact-main{
+    text-align: start;
+    margin-top: 2em;
+    color: beige;
+}
+
+
+.sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.sticky a{
+    color: beige;
+}
+.navbar{
+    background-color: #052b08;
+}
+
+nav li{
+    margin-left: 1em;
+    margin-right: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+.carousel{
+    background-color:#47735B;
+}
+
+
+
+.footer{
+    background-color: #052b08;
+    margin-top: 2em;
+    padding: 1.5em;
+    color: blanchedalmond;
+}
+
+.footer a{
+    color: blanchedalmond;
+}
+
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 1000;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
