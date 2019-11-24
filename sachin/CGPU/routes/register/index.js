@@ -3,6 +3,7 @@ const router  = express.Router()
 const peopleMethods = require('../../methods/people')
 const studentMethods = require('../../methods/student')
 const recruiterMethods = require('../../methods/recruiter')
+var config = require('../../routes/config');
 const uid = require('uniqid')
 const fs = require('fs')
 const bcrypt = require('bcrypt')
@@ -61,15 +62,16 @@ router.post('/student',(req,res) => {
     person.people_id = uid();
     person.name = req.body.name
     person.username = req.body.username
-    const token = jwt.sign({'username': person.username, 'password' : req.body.password }, 'sachhhasdfghhkl')
+//    const token = jwt.sign({'username': person.username, 'password' : req.body.password }, config.secret, {
+//                                    expiresIn: 86400 // expires in 24 hours
+//                                });
+//    console.log(jwt.decode(token))
     person.role = 'student'
-    person.password = token
+    person.password = bcrypt.hashSync(req.body.password,10);
     person.email = req.body.email
     person.phone = req.body.phone
     peopleMethods.addPerson(person)
     .then((person) => {
-
-
         var info = {
             admission_no: req.body.admission_no,
             department: req.body.department,
@@ -82,7 +84,7 @@ router.post('/student',(req,res) => {
     
         info.people_id = person.people_id
         studentMethods.addStudent(info)
-    
+
         .then((info) => {
             res.json({
                 "Success":true,
@@ -90,7 +92,6 @@ router.post('/student',(req,res) => {
             })
             
         })
-    
         .catch((err) => {
             if(err.message == "Validation error"){
                 peopleMethods.removePerson(info)
@@ -116,8 +117,7 @@ router.post('/student',(req,res) => {
         })
         
     })
-
-    .catch((err) => {
+        .catch((err) => {
         if(err.message == "Validation error"){
             peopleMethods.removePerson(person)
             .then((result) => {
@@ -129,14 +129,14 @@ router.post('/student',(req,res) => {
             .catch((err) => {
                 res.json({
                     "Success":false,
-                    "error":err.message
+                    "error":"err.message 341"
                 })
             })
         }
         else{
             res.json({
                 "Success":false,
-                "error":err.message
+                "error":"err.message 348"
             })
         }
     })

@@ -5,36 +5,45 @@ const passport = require('passport')
 const peopleMethods = require('../../methods/people')
 const studentMethods = require('../../methods/student')
 const recruiterMethods = require('../../methods/recruiter')
+var config = require('../../routes/config');
 const uid = require('uniqid')
 const fs = require('fs')
 const bcrypt = require('bcrypt')
 
 /* POST login. */
-router.post('/student',(req, res, next)=>  {
+router.post('/',(req, res, next)=>  {
     var person = {}
-    person.people_id = uid();
+//    person.people_id = uid();
     person.username = req.body.username
-    person.role = 'student'
-    person.email = req.body.email
-    person.phone = req.body.phone
-    const token = jwt.sign({'username': person.username, 'password' : req.body.password }, 'sachhhasdfghhkl')
+//    person.role = 'student'
+//    person.email = req.body.email
+//    person.phone = req.body.phone
+    
     peopleMethods.getPeopleByUsername(person)
     .then((person) => {
-        if( token == person.password){
-            console.log("o")
+        //req.person.loggedin = true;
+          //  req.person.username = person.username;
+        var passwordIsValid= bcrypt.compareSync(req.body.password,person.password)
+        if(!(passwordIsValid)){
+            console.log(p)
+            console.log(person.password)
+            return res.status(401).send({ auth: false, token: null });
+            
             }
         else{
-            console.log(token)
-            console.log(person.password)
-            }
-        res.json({
+
+            const token = jwt.sign({'username': person.username, 'password' : req.body.password }, config.secret, {
+                                    expiresIn: 60*60 // expires in 1 hours
+                                });
+            //res.status(200).send({ auth: true, token: token });
+         /*   res.json({
             "Success":true,
             "password":person.password,
             "username":person.username
-
             
-        })
-        
+        })*/
+            res.status(200).send({ auth: true, token: token });
+        }
     })
     .catch((err) => {
         if(err.message == "Validation error"){
