@@ -31,8 +31,8 @@ router.post('/',(req, res, next)=>  {
             
             }
         else{
-
-            const token = jwt.sign({'username': person.username, 'password' : req.body.password }, config.secret, {
+//, 'password' : req.body.password
+            const token = jwt.sign({'username': person.username }, config.secret, {
                                     expiresIn: 60*60 // expires in 1 hours
                                 });
             //res.status(200).send({ auth: true, token: token });
@@ -71,6 +71,10 @@ router.post('/',(req, res, next)=>  {
 })
 
 
+/*
+router.post('/protected', passport.authenticate('jwt', { session: false }), function(req, res) {
+res.json({ msg: 'Congrats! You are seeing this because you are authorized'});});
+*/
 
 /*
     passport.authenticate('user_local', {session: false}, (err, user, info) => {
