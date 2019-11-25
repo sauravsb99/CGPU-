@@ -3,29 +3,6 @@ const Promise = require('bluebird')
 
 var studentMethods = {}
 
-
-studentMethods.getAllStudents = () =>{
-    return new Promise((resolve, reject) => {
-        model.findAll({
-      
-        })
-        .then((doc) => {     
-            resolve(doc)
-        })
-        .catch((err) => {
-            reject(err)
-        })
-    })
-}
-
-
-
-
-
-
-
-
-
 studentMethods.getStudentByAdmNo = (admNo) => {
     return new Promise((resolve, reject) => {
 /*         console.log("inside student method");
@@ -47,7 +24,6 @@ studentMethods.getStudentByAdmNo = (admNo) => {
         })
     })
 }
-
 
 studentMethods.addStudent = (info) => {
     return new Promise((resolve, reject) => {
