@@ -2,15 +2,9 @@ module.exports = (sequelize, DataTypes) => {
 	const Student = sequelize.define('student',{
 		people_id:{type: DataTypes.STRING, primaryKey: true ,allowNull:false},
 		admission_no:{type: DataTypes.STRING, unique: true ,allowNull:false},
-		username:{type: DataTypes.STRING,allowNull:false},
-		password:{type: DataTypes.STRING,allowNull:false},
 		department:{type:DataTypes.STRING,allowNull:false},
 		date_of_join:{type:DataTypes.DATEONLY,allowNull:false},
-        sex:{type:DataTypes.STRING,allowNull:false},
-        place1:{type:DataTypes.STRING},
-        place2:{type:DataTypes.STRING},
-        place3:{type:DataTypes.STRING}
-
+		course:{type:DataTypes.STRING,allowNull:false}
 	})
 
 	Student.associate = (models) => {
