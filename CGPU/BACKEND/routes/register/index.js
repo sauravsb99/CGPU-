@@ -1,5 +1,6 @@
 const express = require('express')
 const router  = express.Router()
+var path = require('path');
 const peopleMethods = require('../../methods/people')
 const studentMethods = require('../../methods/student')
 const recruiterMethods = require('../../methods/recruiter')
@@ -8,7 +9,11 @@ const fs = require('fs')
 const bcrypt = require('bcrypt')
 
 
-
+//const router = express.Router();
+router.get('/admin',function(req,res){
+  res.sendFile(path.join(__dirname+'../../../../FRONTEND/home.html'));
+  //__dirname : It will resolve to your project folder.
+});
 
 router.post('/admin',(req,res,next) => {
     var person = {}
@@ -165,36 +170,7 @@ router.post('/student',(req,res) => {
                 })
                 }
             })
-
-    
-    //     .then((info) => {
-    //         res.json({
-    //             "Success":true
-    //         })
-    //     })
-    //     .catch((err) => {
-    //         res.json({
-    //             "Success":false,
-    //             "error":err.message
-    //         })
-    //     })    
-    // // })
-    // .catch((err) => {
-    //     res.json({
-    //         "Success":false,
-    //         "error":err.message
-    //     })
-    // })
-// })
-
-//                         res.json({
-//                             "Success":true,
-//                             "username":person.people_id
-//                         })
-                        
-//                     })
-                
-                    .catch((err) => {
+              .catch((err) => {
                         if(err.message == "Validation error"){
                             peopleMethods.removePerson(person)
                             .then((result) => {
@@ -322,35 +298,6 @@ router.post('/recruiter',(req,res) => {
                 })
                 }
             })
-
-    
-    //     .then((info) => {
-    //         res.json({
-    //             "Success":true
-    //         })
-    //     })
-    //     .catch((err) => {
-    //         res.json({
-    //             "Success":false,
-    //             "error":err.message
-    //         })
-    //     })    
-    // // })
-    // .catch((err) => {
-    //     res.json({
-    //         "Success":false,
-    //         "error":err.message
-    //     })
-    // })
-// })
-
-//                         res.json({
-//                             "Success":true,
-//                             "username":person.people_id
-//                         })
-                        
-//                     })
-                
                     .catch((err) => {
                         if(err.message == "Validation error"){
                             peopleMethods.removePerson(person)
@@ -385,113 +332,8 @@ router.post('/recruiter',(req,res) => {
     // person.password=req.body.password
     // console.log(a)
 })
-   
 
-
-
-// router.post('/recruiter',(req,res) => {
-
-//     var person = {}
-//     person.people_id = uid();
-//     person.name = req.body.name
-//     person.role = 'recruiter'
-//     person.email = req.body.email
-//     person.phone = req.body.phone
-//     peopleMethods.addPerson(person)
-//     .then((person) => {
-
-//         var reca = {
-//             rec_id: req.body.rec_id,
-//             rec_name: req.body.rec_name,
-//             rec_package: req.body.rec_package,
-//         }
-    
-//         reca.people_id = person.people_id
-//         recruiterMethods.addRecruiter(reca)
-    
-//         .then((reca) => {
-//             res.json({
-//                 "Success":true,
-//                 "username":"ivide"
-//             })
-            
-//         })
-    
-//         .catch((err) => {
-//             if(err.message == "Validation error"){
-//                 peopleMethods.removePerson(info)
-//                 .then((result) => {
-//                     res.json({
-//                         "Success":false,
-//                         "error":"username already in use"
-//                     })
-//                 })
-//                 .catch((err) => {
-//                     res.json({
-//                         "Success":false,
-//                         "error":err.message
-//                     })
-//                 })
-//             }
-//             else{
-//                 res.json({
-//                     "Success":false,
-//                     "error":err.message
-//                 })
-//             }
-//         })
-
-        
-//     })
-
-//     .catch((err) => {
-//         if(err.message == "Validation error"){
-//             peopleMethods.removePerson(person)
-//             .then((result) => {
-//                 res.json({
-//                     "Success":false,
-//                     "error":"username already in use"
-//                 })
-//             })
-//             .catch((err) => {
-//                 res.json({
-//                     "Success":false,
-//                     "error":err.message
-//                 })
-//             })
-//         }
-//         else{
-//             res.json({
-//                 "Success":false,
-//                 "error":err.message
-//             })
-//         }
-//     })
-
-    
-//     //     .then((info) => {
-//     //         res.json({
-//     //             "Success":true
-//     //         })
-//     //     })
-//     //     .catch((err) => {
-//     //         res.json({
-//     //             "Success":false,
-//     //             "error":err.message
-//     //         })
-//     //     })    
-//     // // })
-//     // .catch((err) => {
-//     //     res.json({
-//     //         "Success":false,
-//     //         "error":err.message
-//     //     })
-//     // })
-// })
-
-
-
-
+/*
 router.post('/recruiter',(req,res) => {
 
     var person = {}
@@ -603,7 +445,7 @@ router.post('/recruiter',(req,res) => {
     // })
 })
 
-
+*/
 
 
 

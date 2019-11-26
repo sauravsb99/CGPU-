@@ -5,13 +5,15 @@ const studentMethods = require('../../methods/student')
 const recruiterMethods = require('../../methods/recruiter')
 const uid = require('uniqid')
 const fs = require('fs')
+
+var path = require('path');
 const bcrypt = require('bcrypt')
 var passport = require('passport')
 require('../../middlewares/passport')
 
-router.get('/login',(req,res)=>{
+router.get('/student',(req,res)=>{
     // app.get('/', function(request, response) {
-        response.sendFile(path.join(__dirname + './login.html'));
+        res.sendFile(path.join(__dirname + '../../../../FRONTEND/loginstudent.html'));
     // });
 })
 router.post('/student',(req,res)=>{
@@ -20,9 +22,11 @@ router.post('/student',(req,res)=>{
         if (err || !user) {
             return res.json({
                 error: info.message
+
             })
         }
     // })
+
     console.log("test")
     req.login(user, {session: false}, (err) => {
         if (err) {
@@ -34,6 +38,11 @@ router.post('/student',(req,res)=>{
         })
         .then((stud)=>{
             console.log(stud)
+            //router.get('/student/logged',(req,res)=>{
+            // app.get('/', function(request, response) {
+            //res.sendFile(path.join(__dirname + '../../../../FRONTEND/student.html'));
+            // });
+            //})
         })
         .catch((err)=>{
             res.send(err)
@@ -48,7 +57,11 @@ router.post('/student',(req,res)=>{
     
 })
 
-
+router.get('/recruiter',(req,res)=>{
+    // app.get('/', function(request, response) {
+        res.sendFile(path.join(__dirname + '../../../../FRONTEND/loginrec.html'));
+    // });
+})
 
 router.post('/recruiter',(req,res)=>{
     
@@ -84,7 +97,11 @@ router.post('/recruiter',(req,res)=>{
     
 })
 
-
+router.get('/admin',(req,res)=>{
+    // app.get('/', function(request, response) {
+        res.sendFile(path.join(__dirname + '../../../../FRONTEND/loginad.html'));
+    // });
+})
 
 router.post('/admin',(req,res)=>{
     
@@ -112,9 +129,6 @@ router.post('/admin',(req,res)=>{
         })
 
     })
-
-
-
 
 })(req,res)
     
