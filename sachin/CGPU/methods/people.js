@@ -100,32 +100,6 @@ peopleMethods.removePerson = (info) => {
     })
 }
 
-// peopleMethods.getPeopleByUsername = (info) => {
-//     return new Promise((resolve,reject) => {
-//         userMethods.findUserByUsername(info)
-//         .then((res) => {
-//             // console.log("res"+res);
-            
-//             model.findOne({
-//                 where:{
-//                     people_id: res.people_id
-//                 }
-//             })
-//             .then((doc) => {
-//                 // console.log("doc"+doc);
-                
-//                 resolve(doc)
-//             })
-//             .catch((err) => {
-//                 reject(err)
-//             })
-//         })
-//         .catch((err) => {
-//             reject(err)
-//         })
-//     })
-// }
-
 peopleMethods.updatePerson = (info) => {
     return new Promise((resolve,reject) => {
         model.update(info,{
@@ -141,29 +115,6 @@ peopleMethods.updatePerson = (info) => {
         })
     })
 }
-
-// peopleMethods.updateProfile = (info) => {
-//     return new Promise((resolve,reject) => {
-//         userMethods.findUserByUsername({
-//             where:{
-//                 user_name:info.username
-//             }
-//         })
-//         .then((user) => {
-//             model.update(info,{
-//                 where:{
-//                     people_id:user.people_id
-//                 }
-//             })
-//             .then((res) => {
-//                 resolve(res)
-//             })
-//         })
-//         .catch((err) => {
-//             reject(err)
-//         })  
-//     })
-// }
 
 
 module.exports = peopleMethods

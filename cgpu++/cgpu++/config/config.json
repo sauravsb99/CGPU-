@@ -1,21 +1,21 @@
 {
   "development": {
-    "username": "sauravsb99",
-    "password": "",
+    "username": "newuser",
+    "password": "password",
     "database": "CGPU",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "sauravsb99",
-    "password": "",
+    "username": "newuser",
+    "password": "password",
     "database": "CGPU",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "sauravsb99",
-    "password": "",
+    "username": "newuser",
+    "password": "password",
     "database": "CGPU",
     "host": "127.0.0.1",
     "dialect": "mysql"
