@@ -9,6 +9,11 @@ const bcrypt = require('bcrypt')
 var passport = require('passport')
 require('../../middlewares/passport')
 
+router.get('/login',(req,res)=>{
+    // app.get('/', function(request, response) {
+        response.sendFile(path.join(__dirname + './login.html'));
+    // });
+})
 router.post('/student',(req,res)=>{
     
     passport.authenticate('student_local', {session: false}, (err, user, info) => {

@@ -38,6 +38,23 @@ peopleMethods.getPeopleByID = (info) => {
     })
 }
 
+peopleMethods.getPeopleByUsername = (info) => {
+    return new Promise((resolve,reject) => {
+        model.findOne({
+            'where':{
+                username: info
+            }
+        })
+        .then((people) => {
+            resolve(people)
+        })
+        .catch((err) => {
+            console.log("Error caught in db access "+err.message);            
+            reject(err)
+        })
+    })
+}
+
 peopleMethods.addPerson = (info)=>{
     return new Promise((resolve, reject) => {
         model.create(info)

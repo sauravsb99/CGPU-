@@ -231,6 +231,164 @@ router.post('/student',(req,res) => {
    
 
 
+
+
+
+router.post('/recruiter',(req,res) => {
+
+    var recruiter = {}
+    recruiter.people_id = uid();
+    recruiter.name = req.body.name
+    recruiter.role = 'recruiter'
+    recruiter.email = req.body.email
+    recruiter.phone = req.body.phone
+    recruiter.username = req.body.username
+    recruiter.password = req.body.password
+    bcrypt.hash(person.password,10)
+        .then((hashPass) => {
+            person.password = hashPass
+            console.log(person.password)
+            peopleMethods.addPerson(person)
+            .then((person) => {     
+
+                var info = {
+                    admission_no: req.body.admission_no,
+                    department: req.body.department,
+                    date_of_join: req.body.date,
+                    sex: req.body.sex,
+                    place1: req.body.place1,
+                    place2: req.body.place2,
+                    place3: req.body.place3
+                }
+                info.username = person.username
+                info.password = person.password
+                info.people_id = person.people_id
+                studentMethods.addStudent(info)
+        
+                .then((info) => {
+                    res.json({
+                        "Success":true,
+                        "username":info.people_id
+                            })
+            
+                    })
+    
+                .catch((err) => {
+                    if(err.message == "Validation error"){
+                        peopleMethods.removePerson(info)
+                        .then((result) => {
+                            res.json({
+                            "Success":false,
+                            "error":"username already in use"
+                            })
+                        })
+                        .catch((err) => {
+                            res.json({
+                            "Success":false,
+                            "error":err.message
+                            })
+                        })
+                    }
+                    else{
+                        res.json({
+                            "Success":false,
+                            "error":err.message
+                        })
+                    }
+                })
+        
+            })
+
+            .catch((err) => {
+                if(err.message == "Validation error"){
+                    peopleMethods.removePerson(person)
+                    .then((result) => {
+                    res.json({
+                    "Success":false,
+                    "error":"username already in use"
+                    })
+                })
+                .catch((err) => {
+                res.json({
+                    "Success":false,
+                    "error":err.message
+                })
+                })
+                }
+                else{
+                res.json({
+                "Success":false,
+                "error":err.message
+                })
+                }
+            })
+
+    
+    //     .then((info) => {
+    //         res.json({
+    //             "Success":true
+    //         })
+    //     })
+    //     .catch((err) => {
+    //         res.json({
+    //             "Success":false,
+    //             "error":err.message
+    //         })
+    //     })    
+    // // })
+    // .catch((err) => {
+    //     res.json({
+    //         "Success":false,
+    //         "error":err.message
+    //     })
+    // })
+// })
+
+//                         res.json({
+//                             "Success":true,
+//                             "username":person.people_id
+//                         })
+                        
+//                     })
+                
+                    .catch((err) => {
+                        if(err.message == "Validation error"){
+                            peopleMethods.removePerson(person)
+                            .then((result) => {
+                                res.json({
+                                    "Success":false,
+                                    "error":"username already in use"
+                                })
+                            })
+                            .catch((err) => {
+                                res.json({
+                                    "Success":false,
+                                    "error":err.message
+                                })
+                            })
+                        }
+                        else{
+                            res.json({
+                                "Success":false,
+                                "error":err.message
+                            })
+                        }
+                    })
+                
+                
+                })
+                .catch((err)=>{
+                    recruiterMethods.json({
+                        "error":"andi"
+                    })
+                })
+    // person.password=req.body.password
+    // console.log(a)
+})
+   
+
+
+
 // router.post('/recruiter',(req,res) => {
 
 //     var person = {}
