@@ -6,13 +6,16 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 
+// require('./middlewares/passport')
 
 var app = express();
 
+
+require('./middlewares/passport')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -37,5 +40,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+// app.get('/', function(request, response) {
+//   // response.sendFile(path.join(__dirname + 'public'));
+//   response.send('CGPU');
+// });
 
 module.exports = app;
