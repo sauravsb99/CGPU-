@@ -13,17 +13,19 @@ require('../../middlewares/passport')
 
 router.get('/student',(req,res)=>{
     // app.get('/', function(request, response) {
-        res.sendFile(path.join(__dirname + '../../../../FRONTEND/loginstudent.html'));
+        res.sendFile(path.join(__dirname + '../../../views/loginstudent.html'));
     // });
 })
 router.post('/student',(req,res)=>{
     
     passport.authenticate('student_local', {session: false}, (err, user, info) => {
         if (err || !user) {
-            return res.json({
-                error: info.message
-
-            })
+ //           return res.json({
+   //             error: info.message
+   router.get('/student',(req,res)=>{
+res.sendFile(path.join(__dirname + '../../../views/student.html'));
+     //       })
+ })
         }
     // })
 
@@ -59,7 +61,7 @@ router.post('/student',(req,res)=>{
 
 router.get('/recruiter',(req,res)=>{
     // app.get('/', function(request, response) {
-        res.sendFile(path.join(__dirname + '../../../../FRONTEND/loginrec.html'));
+        res.sendFile(path.join(__dirname + '../../../views/loginrec.html'));
     // });
 })
 
@@ -99,7 +101,7 @@ router.post('/recruiter',(req,res)=>{
 
 router.get('/admin',(req,res)=>{
     // app.get('/', function(request, response) {
-        res.sendFile(path.join(__dirname + '../../../../FRONTEND/loginad.html'));
+        res.sendFile(path.join(__dirname + '../../../views/loginad.html'));
     // });
 })
 

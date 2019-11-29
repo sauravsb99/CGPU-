@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt')
 
 //const router = express.Router();
 router.get('/admin',function(req,res){
-  res.sendFile(path.join(__dirname+'../../../../FRONTEND/home.html'));
+  res.sendFile(path.join(__dirname+'../../../views/home.html'));
   //__dirname : It will resolve to your project folder.
 });
 
@@ -326,7 +326,7 @@ router.post('/recruiter',(req,res) => {
                 })
                 .catch((err)=>{
                     recruiterMethods.json({
-                        "error":"andi"
+                        "error":"some error"
                     })
                 })
     // person.password=req.body.password
